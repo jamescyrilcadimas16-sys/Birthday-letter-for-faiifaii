@@ -127,3 +127,20 @@ function openGift(){
   },2000);
 }
 </script></body></html>
+  setTimeout(() => {
+    letter.style.transform = 'translate(-50%, -50%)';
+  }, 50);
+
+  setTimeout(()=>{
+    let i=0;
+    let t=setInterval(()=>{
+      type.textContent+=msg[i++]||'';
+      letter.scrollTop=letter.scrollHeight;
+      if(i>msg.length){
+        clearInterval(t);
+        document.getElementById('restartBtn').style.display = 'inline-block';
+      }
+    },45);
+  },2000);
+}
+</script></body></html>
