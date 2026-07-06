@@ -8,7 +8,12 @@ html,body{margin:0;height:100%;overflow:hidden;font-family:Arial;background:line
 #letter{display:none;position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);width:min(92%,760px);max-height:82vh;overflow:auto;background:#ffffffee;border:4px solid gold;border-radius:20px;padding:24px}
 .conf{position:fixed;width:8px;height:8px;animation:fall 3s linear forwards}@keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:0}}
 .fire{position:fixed;border-radius:50%;animation:boom .8s forwards}@keyframes boom{from{width:0;height:0;opacity:1}to{width:140px;height:140px;margin:-70px;opacity:0}}
-</style></head><body><div id=bg></div><div id=stage><div style="position:relative"><div id=lid></div><div id=gift onclick="openGift()"></div></div><div id=hint>🎁 Open My Letter 💙</div></div><div id=letter><h2 style="color:#1565c0">💙 Happy Birthday Faii² 🎂</h2><div id=type style="white-space:pre-wrap;line-height:1.7"></div><div style="text-align:center;margin-top:20px"><button onclick="location.reload()">🎁 Open Again</button></div></div><script>
+</style></head><body><div id=bg></div><div id=stage><div style="position:relative"><div id=lid></div><div id=gift onclick="openGift()"></div></div><div id=hint>🎁 Open My Letter 💙</div></div><div id=letter><h2 style="color:#1565c0">💙 Happy Birthday Faii² 🎂</h2><div id=type style="white-space:pre-wrap;line-height:1.7"></div><div style="text-align:center;margin-top:20px"><button onclick="location.reload()">🎁 Open Again</button></div></div>
+
+<!-- Background Audio Element -->
+<audio id="bgMusic" src="song1.mp3" loop></audio>
+
+<script>
 const msg=`Awhhh happy happyyyy birthday to my beautiful best friend faii²!! 🥳🎉🎊🤗
 
 I hope that this day will be full of happiness, love, and lots of beautiful memories for yahh. But not just today ha, I hope every single day of your life will be filled with happiness and blessings because you truly deserve all the good things in life.
@@ -25,5 +30,15 @@ Again, happy happyyyy birthday to yahhh!! 🥳🎂 Enjoy your special day, keep 
 for(let i=0;i<25;i++){let b=document.createElement('div');b.className='ball';b.style.left=Math.random()*100+'vw';b.style.background=['#42a5f5','#90caf9','#ffd54f','#ef5350','#ab47bc'][i%5];b.style.animation=`up ${8+Math.random()*6}s linear ${Math.random()*8}s infinite`;bg.appendChild(b);}
 function conf(){for(let i=0;i<120;i++){let c=document.createElement('div');c.className='conf';c.style.left=Math.random()*100+'vw';c.style.background=['gold','#2196f3','#fff','#ff4081'][i%4];document.body.appendChild(c);setTimeout(()=>c.remove(),3000)}}
 function fire(){for(let i=0;i<10;i++)setTimeout(()=>{let f=document.createElement('div');f.className='fire';f.style.left=Math.random()*100+'vw';f.style.top=Math.random()*60+'vh';f.style.border='3px solid hsl('+Math.random()*360+',100%,50%)';document.body.appendChild(f);setTimeout(()=>f.remove(),800)},i*180)}
-function openGift(){lid.style.transform='rotate(-35deg) translateY(-25px)';conf();fire();setTimeout(()=>{stage.style.display='none';letter.style.display='block';let i=0;let t=setInterval(()=>{type.textContent+=msg[i++]||'';if(i>msg.length)clearInterval(t)},18)},900)}
+
+function openGift(){
+  // Play the background music
+  const music = document.getElementById('bgMusic');
+  music.play().catch(error => console.log("Audio playback failed or blocked by browser:", error));
+
+  lid.style.transform='rotate(-35deg) translateY(-25px)';
+  conf();
+  fire();
+  setTimeout(()=>{stage.style.display='none';letter.style.display='block';let i=0;let t=setInterval(()=>{type.textContent+=msg[i++]||'';if(i>msg.length)clearInterval(t)},18)},900)
+}
 </script></body></html>
